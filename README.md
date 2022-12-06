@@ -22,9 +22,10 @@ The Outline Shadowsocks service allows for:
 
 Fetch dependencies for this demo:
 ```
-GO111MODULE=off go get github.com/shadowsocks/go-shadowsocks2 github.com/prometheus/prometheus/cmd/...
+{ cd demo; go install github.com/prometheus/prometheus/cmd/prometheus github.com/shadowsocks/go-shadowsocks2; }
 ```
-If that doesn't work, download the [prometheus](https://prometheus.io/download/) or [go-shadowsocks2](https://github.com/shadowsocks/go-shadowsocks2/releases) binaries directly.
+
+Alternatively, download the [prometheus](https://prometheus.io/download/) or [go-shadowsocks2](https://github.com/shadowsocks/go-shadowsocks2/releases) binaries directly.
 
 
 ### Run the server
