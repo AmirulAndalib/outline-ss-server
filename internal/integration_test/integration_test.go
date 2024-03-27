@@ -186,7 +186,7 @@ type statusMetrics struct {
 	statuses []string
 }
 
-func (m *statusMetrics) AddClosedTCPConnection(clientInfo ipinfo.IPInfo, accessKey, status string, data metrics.ProxyMetrics, duration time.Duration) {
+func (m *statusMetrics) AddClosedTCPConnection(clientInfo ipinfo.IPInfo, ip net.Addr, accessKey string, status string, data metrics.ProxyMetrics, duration time.Duration) {
 	m.Lock()
 	m.statuses = append(m.statuses, status)
 	m.Unlock()
@@ -267,10 +267,10 @@ func (m *fakeUDPMetrics) AddUDPPacketFromClient(clientInfo ipinfo.IPInfo, access
 func (m *fakeUDPMetrics) AddUDPPacketFromTarget(clientInfo ipinfo.IPInfo, accessKey, status string, targetProxyBytes, proxyClientBytes int) {
 	m.down = append(m.down, udpRecord{clientInfo, accessKey, status, targetProxyBytes, proxyClientBytes})
 }
-func (m *fakeUDPMetrics) AddUDPNatEntry() {
+func (m *fakeUDPMetrics) AddUDPNatEntry(clientAddr net.Addr, accessKey string) {
 	m.natAdded++
 }
-func (m *fakeUDPMetrics) RemoveUDPNatEntry() {
+func (m *fakeUDPMetrics) RemoveUDPNatEntry(clientAddr net.Addr, accessKey string) {
 	// Not tested because it requires waiting for a long timeout.
 }
 func (m *fakeUDPMetrics) AddUDPCipherSearch(accessKeyFound bool, timeToCipher time.Duration) {}
